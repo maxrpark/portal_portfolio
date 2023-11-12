@@ -1,4 +1,4 @@
-import { Edges, Environment, MeshPortalMaterial } from "@react-three/drei";
+import { Environment, MeshPortalMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import {
   ActiveSection,
@@ -6,10 +6,10 @@ import {
   useThreeContext,
 } from "../context/useThreeContext";
 import { ThreeEvent } from "@react-three/fiber";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useRef } from "react";
 
 import { gsap } from "gsap";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 interface Props {
   rotation: THREE.Euler;
   geometry: THREE.BufferGeometry;

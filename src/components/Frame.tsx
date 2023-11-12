@@ -3,7 +3,6 @@ import { GLTF } from "three-stdlib";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { gsap } from "gsap";
 
 type GLTFResult = GLTF & {
   nodes: {

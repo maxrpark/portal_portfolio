@@ -11,7 +11,7 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { Section, useThreeContext } from "./context/useThreeContext";
 import Floor from "./components/Floor";
-import Cones from "./components/Cones";
+// import Cones from "./components/Cones";
 import Frame from "./components/Frame";
 
 gsap.registerPlugin(Observer);
