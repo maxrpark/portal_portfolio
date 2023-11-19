@@ -12,7 +12,7 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
 
   return (
     <Side
-      rotation={new THREE.Euler(0, Math.PI * 1.3, 0)}
+      rotation={new THREE.Euler(0, Math.PI * 1.33, 0)}
       geometry={geometry}
       section={Section.SOCIAL}
       color={"red"}

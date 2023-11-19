@@ -12,7 +12,7 @@ const AboutSide: React.FC<Props> = ({ geometry }) => {
 
   return (
     <Side
-      rotation={new THREE.Euler(0, Math.PI * 0.7, 0)}
+      rotation={new THREE.Euler(0, Math.PI * 0.67, 0)}
       geometry={geometry}
       section={Section.ABOUT}
       color={"lightblue"}

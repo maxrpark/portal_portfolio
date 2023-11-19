@@ -34,7 +34,7 @@ const Experience: React.FC = () => {
     const observer = Observer.create({
       target: window,
       type: "wheel,touch",
-      onChangeX: (self) => {
+      onChange: (self) => {
         if (activeSection == Section.HOME) {
           geometryRef.current.rotation.y += self.deltaX * 0.02;
         }
@@ -73,9 +73,9 @@ const Experience: React.FC = () => {
       </mesh> */}
 
       {/* <Cones /> */}
-      {/* <Frame index={3} />
+      <Frame index={3} />
       <Frame index={2} />
-      <Frame index={1} /> */}
+      <Frame index={1} />
 
       <Floor />
       <mesh position={[2, 0.5, 0]} scale={0.1}>

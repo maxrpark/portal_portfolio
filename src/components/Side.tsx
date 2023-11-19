@@ -1,6 +1,6 @@
 import { ReactNode, useRef } from "react";
 
-import { Environment, MeshPortalMaterial } from "@react-three/drei";
+import { Environment, MeshPortalMaterial, Text } from "@react-three/drei";
 import * as THREE from "three";
 import {
   ActiveSection,
@@ -56,6 +56,9 @@ const Side: React.FC<Props> = ({
         <Environment preset='apartment' background />
         <ambientLight />
         <group rotation={rotation}>
+          <Text position={[0, 2.5, -10]} color='white'>
+            {section}
+          </Text>
           <mesh visible={true}>
             <planeGeometry args={[10, 10]} />
             <meshStandardMaterial
@@ -66,9 +69,10 @@ const Side: React.FC<Props> = ({
             />
           </mesh>
           <mesh>
-            <sphereGeometry args={[10, 64, 64]} />
+            <sphereGeometry args={[20, 64, 64]} />
             <meshBasicMaterial side={THREE.BackSide} color={color} />
           </mesh>
+
           {children}
         </group>
       </MeshPortalMaterial>
