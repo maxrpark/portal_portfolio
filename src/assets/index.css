@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow: hidden;
+}
 body {
   background: rgb(40, 39, 39);
 }

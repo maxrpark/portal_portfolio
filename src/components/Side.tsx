@@ -1,3 +1,5 @@
+import { ReactNode, useRef } from "react";
+
 import { Environment, MeshPortalMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import {
@@ -6,7 +8,6 @@ import {
   useThreeContext,
 } from "../context/useThreeContext";
 import { ThreeEvent } from "@react-three/fiber";
-import { ReactNode, useRef } from "react";
 
 import { gsap } from "gsap";
 // import { useControls } from "leva";
@@ -26,6 +27,7 @@ const Side: React.FC<Props> = ({
   color,
 }) => {
   const { activeSection, setActiveSection } = useThreeContext();
+  const meshRef = useRef<THREE.Mesh>(null!);
   const portalMaterialRef = useRef(null!);
 
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
@@ -33,13 +35,13 @@ const Side: React.FC<Props> = ({
 
     if (activeSection === section) {
       setActiveSection(Section.HOME);
+
       gsap.to(portalMaterialRef.current, {
         blend: 0,
         duration: 0,
       });
     } else {
       setActiveSection(section);
-      console.log(section);
 
       gsap.to(portalMaterialRef.current, {
         blend: 1,
@@ -49,7 +51,7 @@ const Side: React.FC<Props> = ({
   };
 
   return (
-    <mesh geometry={geometry} onClick={handleClick}>
+    <mesh ref={meshRef} geometry={geometry} onClick={handleClick}>
       <MeshPortalMaterial ref={portalMaterialRef} side={THREE.DoubleSide}>
         <Environment preset='apartment' background />
         <ambientLight />

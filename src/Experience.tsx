@@ -73,9 +73,9 @@ const Experience: React.FC = () => {
       </mesh> */}
 
       {/* <Cones /> */}
-      <Frame index={3} />
+      {/* <Frame index={3} />
       <Frame index={2} />
-      <Frame index={1} />
+      <Frame index={1} /> */}
 
       <Floor />
       <mesh position={[2, 0.5, 0]} scale={0.1}>

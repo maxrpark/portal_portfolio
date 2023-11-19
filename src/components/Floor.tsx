@@ -1,11 +1,12 @@
 import { MeshReflectorMaterial } from "@react-three/drei";
 
 const Floor: React.FC = () => {
+  console.log("max");
   return (
     <mesh position={[0, -1.2, -1.5]} rotation-x={-Math.PI * 0.5}>
       <planeGeometry args={[3, 50]} />
 
-      <MeshReflectorMaterial
+      {/* <MeshReflectorMaterial
         mirror={0.1}
         blur={[300, 100]}
         resolution={2048}
@@ -17,7 +18,7 @@ const Floor: React.FC = () => {
         maxDepthThreshold={1.4}
         color='#050505'
         metalness={0.5}
-      />
+      /> */}
     </mesh>
   );
 };
