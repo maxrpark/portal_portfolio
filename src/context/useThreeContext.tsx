@@ -1,5 +1,4 @@
-import { ReactNode, createContext, useContext, useRef, useState } from "react";
-import * as THREE from "three";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 export enum Section {
   HOME = "HOME",
