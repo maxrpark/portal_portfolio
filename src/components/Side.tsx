@@ -1,13 +1,18 @@
-import { ReactNode, useRef } from "react";
-
-import { Environment, MeshPortalMaterial, Text } from "@react-three/drei";
+import { ReactNode, useRef, useEffect, useState } from "react";
+import { easing, geometry } from "maath";
+import {
+  Environment,
+  MeshPortalMaterial,
+  PresentationControls,
+  Text,
+} from "@react-three/drei";
 import * as THREE from "three";
 import {
   ActiveSection,
   Section,
   useThreeContext,
 } from "../context/useThreeContext";
-import { ThreeEvent } from "@react-three/fiber";
+import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 
 import { gsap } from "gsap";
 // import { useControls } from "leva";
@@ -26,9 +31,14 @@ const Side: React.FC<Props> = ({
   section,
   color,
 }) => {
-  const { activeSection, setActiveSection } = useThreeContext();
+  const { activeSection, setActiveSection, cameraRef } = useThreeContext();
   const meshRef = useRef<THREE.Mesh>(null!);
+  const glassRef = useRef<THREE.Mesh>(null!);
+  const containerGroup = useRef<THREE.Group>(null!);
+  const tl = useRef<gsap.core.Timeline>(null!);
   const portalMaterialRef = useRef(null!);
+
+  const { camera } = useThree();
 
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
     event.stopPropagation();
@@ -36,44 +46,91 @@ const Side: React.FC<Props> = ({
     if (activeSection === section) {
       setActiveSection(Section.HOME);
 
-      gsap.to(portalMaterialRef.current, {
-        blend: 0,
-        duration: 0,
-      });
+      tl.current.reverse();
     } else {
       setActiveSection(section);
-
-      gsap.to(portalMaterialRef.current, {
-        blend: 1,
-        duration: 0,
-      });
+      tl.current.play();
     }
   };
 
-  return (
-    <mesh ref={meshRef} geometry={geometry} onClick={handleClick}>
-      <MeshPortalMaterial ref={portalMaterialRef} side={THREE.DoubleSide}>
-        <Environment preset='apartment' background />
-        <ambientLight />
-        <group rotation={rotation}>
-          <Text position={[0, 2.5, -10]} color='white'>
-            {section}
-          </Text>
-          <mesh visible={true}>
-            <planeGeometry args={[10, 10]} />
-            <meshStandardMaterial
-              opacity={0.1}
-              transparent
-              metalness={1}
-              roughness={0}
-            />
-          </mesh>
-          <mesh>
-            <sphereGeometry args={[20, 64, 64]} />
-            <meshBasicMaterial side={THREE.BackSide} color={color} />
-          </mesh>
+  useEffect(() => {
+    tl.current = gsap
+      .timeline({ paused: true })
+      .to(camera.position, {
+        z: 1,
+        // onUpdate: function () {
+        //   portalMaterialRef.current.blend = this.progress();
+        // },
+      })
+      .to(
+        portalMaterialRef.current,
+        {
+          blend: 1,
+        },
+        0
+      )
+      .to(
+        glassRef.current.material,
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        0
+      );
+    // glassRef;
+  }, []);
 
-          {children}
+  useFrame((state) => {
+    if (activeSection !== section) {
+      containerGroup.current.position.x = state.mouse.x * 0.2;
+      containerGroup.current.position.y = state.mouse.y * 0.2;
+    }
+  });
+
+  return (
+    <mesh
+      name={section}
+      ref={meshRef}
+      geometry={geometry}
+      onDoubleClick={handleClick}
+    >
+      <MeshPortalMaterial ref={portalMaterialRef}>
+        <Environment preset='apartment' />
+        <ambientLight />
+
+        <group rotation={rotation}>
+          <PresentationControls
+            enabled={section === activeSection}
+            global={false}
+            cursor={false}
+            snap={true}
+            speed={1}
+            zoom={1}
+            polar={[0, Math.PI / 2]}
+            azimuth={[-Infinity, Infinity]}
+            config={{ mass: 1, tension: 170, friction: 26 }} // Spring config
+          >
+            <group ref={containerGroup}>
+              <Text position={[0, 2.5, -10]} color='white'>
+                {section}
+              </Text>
+              <mesh ref={glassRef}>
+                <planeGeometry args={[10, 10]} />
+                <meshStandardMaterial
+                  opacity={0.1}
+                  transparent
+                  metalness={1}
+                  roughness={0}
+                />
+              </mesh>
+
+              <mesh visible={color.length > 0}>
+                <sphereGeometry args={[20, 64, 64]} />
+                <meshBasicMaterial side={THREE.BackSide} color={color} />
+              </mesh>
+              {children}
+            </group>
+          </PresentationControls>
         </group>
       </MeshPortalMaterial>
     </mesh>

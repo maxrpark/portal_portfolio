@@ -2,6 +2,8 @@ import React from "react";
 import Side from "./Side";
 import * as THREE from "three";
 import { Section, useThreeContext } from "../context/useThreeContext";
+import { useLoader } from "@react-three/fiber";
+import { Clone, useGLTF } from "@react-three/drei";
 
 interface Props {
   geometry: THREE.BufferGeometry;
@@ -9,6 +11,7 @@ interface Props {
 
 const ProjectsSide: React.FC<Props> = ({ geometry }) => {
   const { setActiveSection } = useThreeContext();
+  const { scene } = useGLTF("/models/Secret_Camping_spot.glb");
 
   return (
     <Side
@@ -17,6 +20,10 @@ const ProjectsSide: React.FC<Props> = ({ geometry }) => {
       section={Section.PROJECTS}
       color={"red"}
     >
+      <Clone object={scene} position={[10, 2, -10]} />
+      <Clone object={scene} position={[1, 0, -7]} />
+      <Clone object={scene} position={[-4, 2, -5]} />
+
       <group
         onDoubleClick={(event) => {
           event.stopPropagation();
@@ -24,12 +31,8 @@ const ProjectsSide: React.FC<Props> = ({ geometry }) => {
         }}
         position-z={-1}
       >
-        {/* <mesh scale={100} position-z={-10}>
-          <planeGeometry args={[10, 10]} />
-          <shaderMaterial />
-        </mesh> */}
         <mesh>
-          <planeGeometry args={[1.2, 1.2, 3.2]} />
+          <planeGeometry args={[0.2, 0.2]} />
           <meshStandardMaterial color={"green"} />
         </mesh>
       </group>

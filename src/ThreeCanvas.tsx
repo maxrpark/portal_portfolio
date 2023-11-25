@@ -9,12 +9,6 @@ const ThreeCanvas: React.FC = () => {
       <Leva collapsed hidden={locationHash !== "#debug"} />
       <Canvas
         shadows
-        camera={{
-          fov: 60,
-          near: 0.2,
-          far: 1000,
-          // position: [0, 0, 10],
-        }}
         gl={{
           antialias: true,
         }}
