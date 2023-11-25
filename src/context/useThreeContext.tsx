@@ -22,7 +22,6 @@ interface Props {
 
 interface ThreeContextInt {
   activeSection: ActiveSection;
-  cameraRef: React.MutableRefObject<THREE.PerspectiveCamera>;
   setActiveSection: React.Dispatch<React.SetStateAction<ActiveSection>>;
 }
 
@@ -33,11 +32,8 @@ export const ThreeProvider: React.FC<Props> = ({ children }) => {
     Section.HOME
   );
 
-  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
   return (
-    <ThreeContext.Provider
-      value={{ activeSection, setActiveSection, cameraRef }}
-    >
+    <ThreeContext.Provider value={{ activeSection, setActiveSection }}>
       {children}
     </ThreeContext.Provider>
   );

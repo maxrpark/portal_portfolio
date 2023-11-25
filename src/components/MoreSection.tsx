@@ -11,7 +11,7 @@ interface Props {
 }
 
 const MoreSection: React.FC<Props> = ({ geometry }) => {
-  const { setActiveSection, activeSection } = useThreeContext();
+  const { setActiveSection } = useThreeContext();
 
   const cloudsRef = useRef<THREE.Group>(null!);
 
@@ -29,7 +29,7 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
     color: "white",
   });
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     // if (activeSection !== Section.SOCIAL) return;
     cloudsRef.current.rotation.y =
       Math.cos(state.clock.elapsedTime * 0.2) * 0.2;

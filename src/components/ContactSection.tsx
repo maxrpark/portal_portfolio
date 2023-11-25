@@ -2,7 +2,6 @@ import React from "react";
 import Side from "./Side";
 import * as THREE from "three";
 import { Section, useThreeContext } from "../context/useThreeContext";
-import { Cloud, Clouds } from "@react-three/drei";
 
 interface Props {
   geometry: THREE.BufferGeometry;

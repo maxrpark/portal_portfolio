@@ -1,5 +1,3 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
-
 const Floor: React.FC = () => {
   console.log("max");
   return (

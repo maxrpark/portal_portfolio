@@ -1,5 +1,4 @@
-import { ReactNode, useRef, useEffect, useState } from "react";
-import { easing, geometry } from "maath";
+import { ReactNode, useRef, useEffect } from "react";
 import {
   Environment,
   MeshPortalMaterial,
@@ -31,7 +30,7 @@ const Side: React.FC<Props> = ({
   section,
   color,
 }) => {
-  const { activeSection, setActiveSection, cameraRef } = useThreeContext();
+  const { activeSection, setActiveSection } = useThreeContext();
   const meshRef = useRef<THREE.Mesh>(null!);
   const glassRef = useRef<THREE.Mesh>(null!);
   const containerGroup = useRef<THREE.Group>(null!);

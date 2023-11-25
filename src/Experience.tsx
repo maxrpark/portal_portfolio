@@ -1,4 +1,4 @@
-import { Environment, PerspectiveCamera, useGLTF } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/Addons.js";
 import ProjectsSide from "./components/ProjectsSide";
@@ -60,14 +60,6 @@ const Experience: React.FC = () => {
   return (
     <>
       <Environment preset='apartment' />
-      {/* <PerspectiveCamera
-        makeDefault
-        ref={cameraRef}
-        fov={60}
-        near={0.2}
-        far={1000}
-        position={[0, 0, 5]}
-      /> */}
 
       <group name={Section.HOME} ref={geometryRef} position-z={-0.1}>
         <AboutSide geometry={nodes.Cone001.geometry} />
