@@ -1,5 +1,4 @@
 const Floor: React.FC = () => {
-  console.log("max");
   return (
     <mesh position={[0, -1.2, -1.5]} rotation-x={-Math.PI * 0.5}>
       <planeGeometry args={[3, 50]} />

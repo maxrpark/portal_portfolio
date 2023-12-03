@@ -1,4 +1,4 @@
-import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/Addons.js";
 import ProjectsSide from "./components/ProjectsSide";
@@ -11,10 +11,7 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { Section, useThreeContext } from "./context/useThreeContext";
 import Floor from "./components/Floor";
-// import Cones from "./components/Cones";
 import Frame from "./components/Frame";
-
-import EarthGlobe from "./components/about/EarthGlobe";
 
 gsap.registerPlugin(Observer);
 
@@ -63,6 +60,7 @@ const Experience: React.FC = () => {
     <>
       {/* <EarthGlobe /> */}
       {/* <OrbitControls /> */}
+      {/* <Rig /> */}
       <Environment preset='apartment' />
       <group name={Section.HOME} ref={geometryRef} position-z={-0.1}>
         <AboutSide geometry={nodes.Cone001.geometry} />
@@ -72,11 +70,11 @@ const Experience: React.FC = () => {
       </group>
 
       {/* <AboutSide geometry={nodes.Cone001.geometry} /> */}
-      {/* <mesh position={[-2, 0, 0]}>
+      <mesh position={[-2, 0, 0]}>
         <coneGeometry args={[1, 1.5, 3]} />
-      </mesh> */}
+      </mesh>
       {/* <Cones /> */}
-      {/* <Frame index={3} />
+      <Frame index={3} />
       <Frame index={2} />
       <Frame index={1} />
 
@@ -84,7 +82,7 @@ const Experience: React.FC = () => {
       <mesh position={[2, 0.5, 0]} scale={0.1}>
         <sphereGeometry />
         <meshStandardMaterial color={"lightgreen"} />
-      </mesh> */}
+      </mesh>
     </>
   );
 };

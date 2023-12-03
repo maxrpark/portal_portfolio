@@ -30,12 +30,10 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
   });
 
   useFrame((state) => {
-    // if (activeSection !== Section.SOCIAL) return;
     cloudsRef.current.rotation.y =
       Math.cos(state.clock.elapsedTime * 0.2) * 0.2;
     cloudsRef.current.rotation.x =
       Math.sin(state.clock.elapsedTime * 0.2) * 0.2;
-    // cloud0.current.rotation.y -= delta;
   });
 
   return (
@@ -50,21 +48,11 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
           event.stopPropagation();
           setActiveSection(Section.HOME);
         }}
-        position-z={-1}
+        position-z={-20}
       >
         <Sky />
         <group ref={cloudsRef}>
           <Clouds material={THREE.MeshBasicMaterial}>
-            {/* <Cloud
-              segments={40}
-              bounds={[10, 2, 2]}
-              volume={10}
-              color='eed0d0'
-              scale={0.2}
-              seed={2}
-            />
-            <Cloud seed={1} scale={0.2} volume={5} color='white' fade={100} /> */}
-            {/* <Cloud ref={cloud0} {...config} bounds={[x, y, z]} color={color} /> */}
             <Cloud
               {...config}
               bounds={[x, y, z]}

@@ -12,7 +12,7 @@ import {
   Section,
   useThreeContext,
 } from "../context/useThreeContext";
-import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
+import { ThreeEvent, useThree } from "@react-three/fiber";
 
 import { gsap } from "gsap";
 // import { useControls } from "leva";
@@ -64,9 +64,6 @@ const Side: React.FC<Props> = ({
       .timeline({ paused: true })
       .to(camera.position, {
         z: 1,
-        // onUpdate: function () {
-        //   portalMaterialRef.current.blend = this.progress();
-        // },
       })
       .to(
         portalMaterialRef.current,
@@ -86,13 +83,6 @@ const Side: React.FC<Props> = ({
     // glassRef;
   }, []);
 
-  // useFrame((state) => {
-  //   if (activeSection !== section) {
-  //     containerGroup.current.position.x = state.mouse.x * 0.2;
-  //     containerGroup.current.position.y = state.mouse.y * 0.2;
-  //   }
-  // });
-
   return (
     <mesh
       name={section}
@@ -105,13 +95,15 @@ const Side: React.FC<Props> = ({
         <ambientLight />
         <Sparkles
           visible={section === Section.ABOUT}
-          count={500}
-          scale={10}
-          speed={0.2}
+          count={100}
+          scale={2}
+          size={0.2}
+          speed={0.01}
         />
         <group rotation={rotation}>
           <PresentationControls
-            enabled={section === activeSection}
+            enabled={false}
+            // enabled={section === activeSection}
             global={false}
             cursor={false}
             snap={true}
