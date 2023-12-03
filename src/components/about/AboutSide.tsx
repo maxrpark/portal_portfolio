@@ -1,8 +1,9 @@
 import React from "react";
-import Side from "./Side";
+import Side from "../Side";
 import * as THREE from "three";
-import { Section, useThreeContext } from "../context/useThreeContext";
-import { Sparkles } from "@react-three/drei";
+import { Section, useThreeContext } from "../../context/useThreeContext";
+import { Sparkles, useTexture } from "@react-three/drei";
+import EarthGlobe from "./EarthGlobe";
 
 interface Props {
   geometry: THREE.BufferGeometry;
@@ -13,6 +14,7 @@ const AboutSide: React.FC<Props> = ({ geometry }) => {
 
   return (
     <Side
+      // rotation={new THREE.Euler(0, 0, 0)}
       rotation={new THREE.Euler(0, Math.PI * 0.67, 0)}
       geometry={geometry}
       section={Section.ABOUT}
@@ -23,14 +25,9 @@ const AboutSide: React.FC<Props> = ({ geometry }) => {
           event.stopPropagation();
           setActiveSection(Section.HOME);
         }}
-        position-z={-1}
+        position-z={-4}
       >
-        <Sparkles count={500} scale={10} speed={0.2} />
-        <mesh>
-          <planeGeometry args={[1.2, 1.2, 3.2]} />
-
-          <meshStandardMaterial color={"red"} />
-        </mesh>
+        <EarthGlobe />
       </group>
     </Side>
   );

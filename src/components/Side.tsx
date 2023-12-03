@@ -3,6 +3,7 @@ import {
   Environment,
   MeshPortalMaterial,
   PresentationControls,
+  Sparkles,
   Text,
 } from "@react-three/drei";
 import * as THREE from "three";
@@ -53,6 +54,12 @@ const Side: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    // if (section === Section.ABOUT) {
+    //   portalMaterialRef.current.blend = 1;
+    //   glassRef.current.material.opacity = 0;
+    // }
+
+    // return;
     tl.current = gsap
       .timeline({ paused: true })
       .to(camera.position, {
@@ -79,12 +86,12 @@ const Side: React.FC<Props> = ({
     // glassRef;
   }, []);
 
-  useFrame((state) => {
-    if (activeSection !== section) {
-      containerGroup.current.position.x = state.mouse.x * 0.2;
-      containerGroup.current.position.y = state.mouse.y * 0.2;
-    }
-  });
+  // useFrame((state) => {
+  //   if (activeSection !== section) {
+  //     containerGroup.current.position.x = state.mouse.x * 0.2;
+  //     containerGroup.current.position.y = state.mouse.y * 0.2;
+  //   }
+  // });
 
   return (
     <mesh
@@ -96,7 +103,12 @@ const Side: React.FC<Props> = ({
       <MeshPortalMaterial ref={portalMaterialRef}>
         <Environment preset='apartment' />
         <ambientLight />
-
+        <Sparkles
+          visible={section === Section.ABOUT}
+          count={500}
+          scale={10}
+          speed={0.2}
+        />
         <group rotation={rotation}>
           <PresentationControls
             enabled={section === activeSection}
