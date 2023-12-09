@@ -58,9 +58,7 @@ const Experience: React.FC = () => {
   }, [activeSection]);
   return (
     <>
-      {/* <EarthGlobe /> */}
       {/* <OrbitControls /> */}
-      {/* <Rig /> */}
       <Environment preset='apartment' />
       <group name={Section.HOME} ref={geometryRef} position-z={-0.1}>
         <AboutSide geometry={nodes.Cone001.geometry} />
@@ -69,11 +67,9 @@ const Experience: React.FC = () => {
         <MoreSection geometry={nodes.Cone004.geometry} />
       </group>
 
-      {/* <AboutSide geometry={nodes.Cone001.geometry} /> */}
       <mesh position={[-2, 0, 0]}>
         <coneGeometry args={[1, 1.5, 3]} />
       </mesh>
-      {/* <Cones /> */}
       <Frame index={3} />
       <Frame index={2} />
       <Frame index={1} />

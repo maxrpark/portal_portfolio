@@ -15,7 +15,6 @@ import {
 import { ThreeEvent, useThree } from "@react-three/fiber";
 
 import { gsap } from "gsap";
-// import { useControls } from "leva";
 interface Props {
   rotation: THREE.Euler;
   geometry: THREE.BufferGeometry;
@@ -54,12 +53,6 @@ const Side: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    // if (section === Section.ABOUT) {
-    //   portalMaterialRef.current.blend = 1;
-    //   glassRef.current.material.opacity = 0;
-    // }
-
-    // return;
     tl.current = gsap
       .timeline({ paused: true })
       .to(camera.position, {
@@ -102,8 +95,7 @@ const Side: React.FC<Props> = ({
         />
         <group rotation={rotation}>
           <PresentationControls
-            enabled={false}
-            // enabled={section === activeSection}
+            enabled={section === activeSection}
             global={false}
             cursor={false}
             snap={true}

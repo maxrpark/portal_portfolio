@@ -14,7 +14,7 @@ const calcPosFromLatLongRad = function (
   return new THREE.Vector3(x, y, z);
 };
 
-interface MarkerInt {
+export interface MarkerInt {
   id: number;
   lat: number;
   lng: number;
