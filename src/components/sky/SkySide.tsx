@@ -1,16 +1,17 @@
 import React, { useRef } from "react";
-import Side from "./Side";
+import Side from "../Side";
 import * as THREE from "three";
-import { Section, useThreeContext } from "../context/useThreeContext";
+import { Section, useThreeContext } from "../../context/useThreeContext";
 import { Cloud, Clouds, Sky } from "@react-three/drei";
 import { useControls } from "leva";
 import { useFrame } from "@react-three/fiber";
+import Birds from "./Birds";
 
 interface Props {
   geometry: THREE.BufferGeometry;
 }
 
-const MoreSection: React.FC<Props> = ({ geometry }) => {
+const SkySide: React.FC<Props> = ({ geometry }) => {
   const { setActiveSection } = useThreeContext();
 
   const cloudsRef = useRef<THREE.Group>(null!);
@@ -41,7 +42,6 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
       rotation={new THREE.Euler(0, Math.PI * 1.33, 0)}
       geometry={geometry}
       section={Section.SOCIAL}
-      color={""}
     >
       <group
         onDoubleClick={(event) => {
@@ -50,7 +50,10 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
         }}
         position-z={-20}
       >
-        <Sky />
+        <group position-z={20}>
+          <Birds />
+        </group>
+        <Sky sunPosition={[0, 10, 10]} />
         <group ref={cloudsRef}>
           <Clouds material={THREE.MeshBasicMaterial}>
             <Cloud
@@ -97,4 +100,4 @@ const MoreSection: React.FC<Props> = ({ geometry }) => {
   );
 };
 
-export default MoreSection;
+export default SkySide;

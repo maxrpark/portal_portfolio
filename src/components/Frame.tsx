@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
+import { extend, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
 type GLTFResult = GLTF & {
@@ -14,9 +14,14 @@ interface Props {
   index: number;
 }
 
+import { PattersMaterial } from "../shaders/PatterShaders";
+
+extend({ PattersMaterial });
+
 const Frame: React.FC<Props> = ({ index }) => {
   const { nodes } = useGLTF("/frame.glb") as GLTFResult;
   const frameRef = useRef<THREE.Mesh>(null!);
+  // const materialRef = useRef();
 
   useFrame((_, delta) => {
     frameRef.current.rotation.z += delta * index * 0.05;
@@ -27,7 +32,10 @@ const Frame: React.FC<Props> = ({ index }) => {
       //   opacity: 0,
       // });
     }
+    // @ts-ignore
+    // materialRef.current.uTime += delta;
   });
+
   return (
     <>
       <mesh
@@ -35,12 +43,10 @@ const Frame: React.FC<Props> = ({ index }) => {
         scale={[6, 6, 1.2]}
         position-z={index * -15}
         rotation-z={index * 2}
-        dispose={null}
-        castShadow
-        receiveShadow
         geometry={nodes.Cube.geometry}
       />
-      <meshStandardMaterial color={"blue"} />
+      <meshBasicMaterial color={"blue"} />
+      {/* <pattersMaterial ref={materialRef} uTime={1} /> */}
     </>
   );
 };

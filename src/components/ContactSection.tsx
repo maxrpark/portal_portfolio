@@ -15,7 +15,6 @@ const ContactSection: React.FC<Props> = ({ geometry }) => {
       rotation={new THREE.Euler(0, 0, Math.PI / 2)}
       geometry={geometry}
       section={Section.CONTACT}
-      color={"yellow"}
     >
       <group
         onDoubleClick={(event) => {

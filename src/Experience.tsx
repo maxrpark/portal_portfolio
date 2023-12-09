@@ -1,17 +1,18 @@
-import { Environment, useGLTF } from "@react-three/drei";
+import { Environment, Sky, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/Addons.js";
-import ProjectsSide from "./components/ProjectsSide";
-import AboutSide from "./components/about/AboutSide";
+import OceanSide from "./components/ocean/OceanSide";
+import SpaceSideSection from "./components/space/SpaceSideSection";
 import ContactSection from "./components/ContactSection";
-import MoreSection from "./components/MoreSection";
-import { useEffect, useRef } from "react";
+
+import { Suspense, useEffect, useRef } from "react";
 
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { Section, useThreeContext } from "./context/useThreeContext";
 import Floor from "./components/Floor";
 import Frame from "./components/Frame";
+import SkySide from "./components/sky/SkySide";
 
 gsap.registerPlugin(Observer);
 
@@ -58,13 +59,12 @@ const Experience: React.FC = () => {
   }, [activeSection]);
   return (
     <>
-      {/* <OrbitControls /> */}
       <Environment preset='apartment' />
       <group name={Section.HOME} ref={geometryRef} position-z={-0.1}>
-        <AboutSide geometry={nodes.Cone001.geometry} />
+        <SpaceSideSection geometry={nodes.Cone001.geometry} />
         <ContactSection geometry={nodes.Cone002.geometry} />
-        <ProjectsSide geometry={nodes.Cone003.geometry} />
-        <MoreSection geometry={nodes.Cone004.geometry} />
+        <OceanSide geometry={nodes.Cone003.geometry} />
+        <SkySide geometry={nodes.Cone004.geometry} />
       </group>
 
       <mesh position={[-2, 0, 0]}>

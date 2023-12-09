@@ -4,7 +4,6 @@ import {
   MeshPortalMaterial,
   PresentationControls,
   Sparkles,
-  Text,
 } from "@react-three/drei";
 import * as THREE from "three";
 import {
@@ -20,16 +19,9 @@ interface Props {
   geometry: THREE.BufferGeometry;
   children: ReactNode;
   section: ActiveSection;
-  color: string;
 }
 
-const Side: React.FC<Props> = ({
-  geometry,
-  rotation,
-  children,
-  section,
-  color,
-}) => {
+const Side: React.FC<Props> = ({ geometry, rotation, children, section }) => {
   const { activeSection, setActiveSection } = useThreeContext();
   const meshRef = useRef<THREE.Mesh>(null!);
   const glassRef = useRef<THREE.Mesh>(null!);
@@ -53,6 +45,7 @@ const Side: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    // camera={{ position: [0, 5, 100], fov: 55, near: 1, far: 20000 }}
     tl.current = gsap
       .timeline({ paused: true })
       .to(camera.position, {
@@ -93,9 +86,11 @@ const Side: React.FC<Props> = ({
           size={0.2}
           speed={0.01}
         />
+
         <group rotation={rotation}>
           <PresentationControls
-            enabled={section === activeSection}
+            enabled={false}
+            // enabled={section === activeSection}
             global={false}
             cursor={false}
             snap={true}
@@ -106,9 +101,6 @@ const Side: React.FC<Props> = ({
             config={{ mass: 1, tension: 170, friction: 26 }} // Spring config
           >
             <group ref={containerGroup}>
-              <Text position={[0, 2.5, -10]} color='white'>
-                {section}
-              </Text>
               <mesh ref={glassRef}>
                 <planeGeometry args={[10, 10]} />
                 <meshStandardMaterial
@@ -119,10 +111,6 @@ const Side: React.FC<Props> = ({
                 />
               </mesh>
 
-              <mesh visible={color.length > 0}>
-                <sphereGeometry args={[20, 64, 64]} />
-                <meshBasicMaterial side={THREE.BackSide} color={color} />
-              </mesh>
               {children}
             </group>
           </PresentationControls>

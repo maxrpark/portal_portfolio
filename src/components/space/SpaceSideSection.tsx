@@ -13,7 +13,7 @@ interface Props {
   geometry: THREE.BufferGeometry;
 }
 
-const AboutSide: React.FC<Props> = ({ geometry }) => {
+const SpaceSideSection: React.FC<Props> = ({ geometry }) => {
   const { setActiveSection } = useThreeContext();
 
   const planetRef = useRef<THREE.Group>(null!);
@@ -28,7 +28,6 @@ const AboutSide: React.FC<Props> = ({ geometry }) => {
         rotation={new THREE.Euler(0, Math.PI * 0.67, 0)}
         geometry={geometry}
         section={Section.ABOUT}
-        color={"black"}
       >
         <group
           onDoubleClick={(event) => {
@@ -46,4 +45,4 @@ const AboutSide: React.FC<Props> = ({ geometry }) => {
   );
 };
 
-export default AboutSide;
+export default SpaceSideSection;
