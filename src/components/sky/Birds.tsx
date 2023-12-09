@@ -7,12 +7,8 @@ Title: Bird
 */
 
 import * as THREE from "three";
-import React, { useEffect, useRef } from "react";
-import { useGLTF, useAnimations, Clone } from "@react-three/drei";
-import { Section, useThreeContext } from "../../context/useThreeContext";
-
-type ActionName = "Scene";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
+import React, { useEffect } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
 
 interface Props {
   position: THREE.Vector3;

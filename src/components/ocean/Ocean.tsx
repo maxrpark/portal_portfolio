@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from "react";
-import { extend, useThree, useLoader, useFrame } from "@react-three/fiber";
+import { extend, useLoader, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 import { Water } from "three-stdlib";
@@ -9,7 +9,7 @@ extend({ Water });
 
 const Ocean: React.FC = () => {
   const ref = useRef<THREE.ShaderMaterial>(null!);
-  const gl = useThree((state) => state.gl);
+  // const gl = useThree((state) => state.gl);
   const waterNormals = useLoader(THREE.TextureLoader, "/waternormals.jpg");
 
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;

@@ -1,11 +1,11 @@
-import { Environment, Sky, useGLTF } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/Addons.js";
 import OceanSide from "./components/ocean/OceanSide";
 import SpaceSideSection from "./components/space/SpaceSideSection";
 import ContactSection from "./components/ContactSection";
 
-import { Suspense, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
