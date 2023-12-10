@@ -13,6 +13,7 @@ import { Section, useThreeContext } from "./context/useThreeContext";
 import Floor from "./components/Floor";
 import Frame from "./components/Frame";
 import SkySide from "./components/sky/SkySide";
+import Circle from "./components/Cicle";
 
 gsap.registerPlugin(Observer);
 
@@ -67,18 +68,12 @@ const Experience: React.FC = () => {
         <SkySide geometry={nodes.Cone004.geometry} />
       </group>
 
-      <mesh position={[-2, 0, 0]}>
-        <coneGeometry args={[1, 1.5, 3]} />
-      </mesh>
       <Frame index={3} />
       <Frame index={2} />
       <Frame index={1} />
 
       <Floor />
-      <mesh position={[2, 0.5, 0]} scale={0.1}>
-        <sphereGeometry />
-        <meshStandardMaterial color={"lightgreen"} />
-      </mesh>
+      <Circle position={new THREE.Vector3(-0, 0, -50)} />
     </>
   );
 };

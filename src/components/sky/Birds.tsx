@@ -7,8 +7,9 @@ Title: Bird
 */
 
 import * as THREE from "three";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 interface Props {
   position: THREE.Vector3;
@@ -17,24 +18,28 @@ interface Props {
 const Bird: React.FC<Props> = ({ position }) => {
   const { scene, animations } = useGLTF("/models/birds.glb");
   const { actions } = useAnimations(animations, scene);
+  const ref = useRef<THREE.Group>(null!);
   useEffect(() => {
     //@ts-ignore
     actions.Scene.play();
   }, []);
+  useFrame((_, delta) => {
+    ref.current.position.z -= delta;
+    if (ref.current.position.z < -100) {
+      ref.current.position.z = 10;
+    }
+  });
   return (
-    <group position={position}>
-      <mesh scale={0.2}>
-        <boxGeometry></boxGeometry>
-      </mesh>
+    <group ref={ref} position={position}>
       <primitive object={scene} />
     </group>
   );
 };
 const Birds: React.FC = () => {
   return (
-    <group>
-      <Bird position={new THREE.Vector3(0, 0, 0)} />
+    <group position-z={20}>
       <Bird position={new THREE.Vector3(1, 0, 0)} />
+      <Bird position={new THREE.Vector3(-1, 0, 0)} />
     </group>
   );
 };

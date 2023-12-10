@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Perf } from "r3f-perf";
 import Experience from "./Experience";
+import { Physics } from "@react-three/rapier";
 const locationHash = window.location.hash;
 const ThreeCanvas: React.FC = () => {
   return (
@@ -13,7 +14,9 @@ const ThreeCanvas: React.FC = () => {
           antialias: true,
         }}
       >
-        <Experience />
+        <Physics>
+          <Experience />
+        </Physics>
         {locationHash === "#debug" && <Perf position='top-left' />}
       </Canvas>
     </div>

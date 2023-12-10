@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Side from "../Side";
 import * as THREE from "three";
 import { Section, useThreeContext } from "../../context/useThreeContext";
@@ -6,13 +6,27 @@ import { Cloud, Clouds, Sky } from "@react-three/drei";
 import { useControls } from "leva";
 import { useFrame } from "@react-three/fiber";
 import Birds from "./Birds";
+import AirPlane from "./AirPlane";
 
 interface Props {
   geometry: THREE.BufferGeometry;
 }
 
 const SkySide: React.FC<Props> = ({ geometry }) => {
-  const { setActiveSection } = useThreeContext();
+  const { setActiveSection, activeSection } = useThreeContext();
+
+  const [positionZ, setPositionZ] = useState(-10);
+  const [turbidity, setTurbidity] = useState(0.001);
+
+  useEffect(() => {
+    if (activeSection === Section.PROJECTS) {
+      setPositionZ(-1000);
+      setTurbidity(0.001);
+    } else {
+      setPositionZ(-10.1);
+      setTurbidity(0.01);
+    }
+  }, [activeSection]);
 
   const cloudsRef = useRef<THREE.Group>(null!);
 
@@ -50,10 +64,9 @@ const SkySide: React.FC<Props> = ({ geometry }) => {
         }}
         position-z={-20}
       >
-        <group position-z={20}>
-          <Birds />
-        </group>
-        <Sky sunPosition={[0, 10, 10]} />
+        <Birds />
+        <AirPlane />
+        <Sky sunPosition={[0, 10, positionZ]} turbidity={turbidity} />
         <group ref={cloudsRef}>
           <Clouds material={THREE.MeshBasicMaterial}>
             <Cloud

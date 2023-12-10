@@ -3,7 +3,7 @@ import {
   Environment,
   MeshPortalMaterial,
   PresentationControls,
-  Sparkles,
+  Stars,
 } from "@react-three/drei";
 import * as THREE from "three";
 import {
@@ -45,7 +45,6 @@ const Side: React.FC<Props> = ({ geometry, rotation, children, section }) => {
   };
 
   useEffect(() => {
-    // camera={{ position: [0, 5, 100], fov: 55, near: 1, far: 20000 }}
     tl.current = gsap
       .timeline({ paused: true })
       .to(camera.position, {
@@ -79,18 +78,24 @@ const Side: React.FC<Props> = ({ geometry, rotation, children, section }) => {
       <MeshPortalMaterial ref={portalMaterialRef}>
         <Environment preset='apartment' />
         <ambientLight />
-        <Sparkles
-          visible={section === Section.ABOUT}
-          count={100}
-          scale={2}
-          size={0.2}
-          speed={0.01}
+
+        <Stars
+          radius={100}
+          depth={50}
+          count={5000}
+          factor={
+            activeSection === Section.SOCIAL || activeSection === Section.HOME
+              ? 0
+              : 4
+          }
+          saturation={1}
+          fade
+          speed={1}
         />
 
         <group rotation={rotation}>
           <PresentationControls
             enabled={false}
-            // enabled={section === activeSection}
             global={false}
             cursor={false}
             snap={true}

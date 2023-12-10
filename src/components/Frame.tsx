@@ -45,7 +45,8 @@ const Frame: React.FC<Props> = ({ index }) => {
         rotation-z={index * 2}
         geometry={nodes.Cube.geometry}
       />
-      <meshBasicMaterial color={"blue"} />
+      <boxGeometry args={[20, 20, 20]} />
+      <meshBasicMaterial color={"blue"} wireframe />
       {/* <pattersMaterial ref={materialRef} uTime={1} /> */}
     </>
   );

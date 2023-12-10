@@ -4,15 +4,16 @@ import * as THREE from "three";
 import { Section, useThreeContext } from "../../context/useThreeContext";
 import Ocean from "./Ocean";
 import { Center, Float, Sky, Text3D } from "@react-three/drei";
+// import AirPlane from "../sky/AirPlane";
 
 interface Props {
   geometry: THREE.BufferGeometry;
 }
 
 const OceanSide: React.FC<Props> = ({ geometry }) => {
-  const { setActiveSection, activeSection } = useThreeContext();
   const [positionZ, setPositionZ] = useState(-1000);
   const [turbidity, setTurbidity] = useState(0.001);
+  const { activeSection, setActiveSection } = useThreeContext();
 
   useEffect(() => {
     if (activeSection === Section.PROJECTS) {
@@ -37,12 +38,13 @@ const OceanSide: React.FC<Props> = ({ geometry }) => {
         }}
         position={[0, -20, -100]}
       >
-        <Ocean />
+        {/* <AirPlane /> */}
         <Sky sunPosition={[400, 10, positionZ]} turbidity={turbidity} />
+        <Ocean />
         <Float
-          speed={2} // Animation speed, defaults to 1
-          rotationIntensity={0.1} // XYZ rotation intensity, defaults to 1
-          floatIntensity={1.2} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+          speed={2}
+          rotationIntensity={0.1}
+          floatIntensity={1.2}
           floatingRange={[-3, 0.5]}
         >
           <Center top>
